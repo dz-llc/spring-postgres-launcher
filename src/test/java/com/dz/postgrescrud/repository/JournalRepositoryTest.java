@@ -2,13 +2,12 @@ package com.dz.postgrescrud.repository;
 
 import com.dz.postgrescrud.configuration.RepositoryConfiguration;
 import com.dz.postgrescrud.domain.Journal;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
-
-import org.junit.jupiter.api.Assertions;
 
 @SpringBootTest(classes = {RepositoryConfiguration.class})
 public class JournalRepositoryTest {
@@ -21,7 +20,7 @@ public class JournalRepositoryTest {
     }
 
     @Test
-    public void testSaveJournal(){
+    public void testSaveJournal() {
         //setup journal
         Journal journal = new Journal();
         journal.setJournalEntry("Test Journal Entry");
@@ -58,7 +57,7 @@ public class JournalRepositoryTest {
         //get all products, list should only have one
         Iterable<Journal> journals = journalRepository.findAll();
         int count = 0;
-        for(Journal j : journals){
+        for (Journal j : journals) {
             count++;
         }
         Assertions.assertEquals(count, 1);

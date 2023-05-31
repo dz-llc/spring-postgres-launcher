@@ -15,43 +15,24 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 @EnableWebSecurity
 @RequiredArgsConstructor
 @EnableMethodSecurity
-public class SecurityConfiguration {
 
+public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeHttpRequests((authorize) -> authorize
-//                        .requestMatchers("/public/**").permitAll()
-//                        .requestMatchers("/journal").permitAll()
-//                        .anyRequest().authenticated()
-//
-//                );
-//        return http.build();
-//    }
-
     // TODO: https://stackoverflow.com/questions/45241566/spring-boot-unit-tests-with-jwt-token-security
-    // Simpler solution that involves just validating a JWT rather than looking up users in tables
+    // ^ Describes a simpler solution that involves just validating a JWT rather than looking up users in tables
     @Bean
     public SecurityFilterChain formLoginSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
+        http
+                .csrf()
+                .disable()
+                .authorizeHttpRequests()
                 .anyRequest().authenticated()
                 .and()
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
-//    @Bean
-//    public SecurityFilterChain springSecurityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeHttpRequests()
-//                .and()
-//                .oauth2ResourceServer()
-//                .jwt();
-//        return http.build();
-//    }
 }

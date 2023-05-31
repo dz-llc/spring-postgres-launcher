@@ -1,6 +1,7 @@
 package com.dz.postgrescrud.domain;
 
 import jakarta.persistence.*;
+
 import java.time.Instant;
 
 @Entity
