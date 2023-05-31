@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableAutoConfiguration
-@EntityScan(basePackages = {"com.dz.postgrescrud.domain"})
-@EnableJpaRepositories(basePackages = {"com.dz.postgrescrud.repository"})
+@EntityScan(basePackages = {"com.dz.postgrescrud.domain","com.dz.postgrescrud.token","com.dz.postgrescrud.user"})
+@EnableJpaRepositories(basePackages = {"com.dz.postgrescrud.repository","com.dz.postgrescrud.token","com.dz.postgrescrud.user"})
 @EnableTransactionManagement
 public class RepositoryConfiguration {
 }
