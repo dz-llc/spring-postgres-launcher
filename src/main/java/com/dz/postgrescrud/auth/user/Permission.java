@@ -1,4 +1,4 @@
-package com.dz.postgrescrud.user;
+package com.dz.postgrescrud.auth.user;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

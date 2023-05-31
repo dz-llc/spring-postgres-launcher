@@ -1,6 +1,6 @@
 package com.dz.postgrescrud.configuration;
 
-import com.dz.postgrescrud.token.TokenRepository;
+import com.dz.postgrescrud.auth.token.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

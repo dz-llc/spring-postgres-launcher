@@ -1,6 +1,6 @@
 package com.dz.postgrescrud.auth;
 
-import com.dz.postgrescrud.user.Role;
+import com.dz.postgrescrud.auth.user.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

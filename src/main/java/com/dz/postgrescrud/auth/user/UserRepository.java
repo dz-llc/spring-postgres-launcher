@@ -1,4 +1,4 @@
-package com.dz.postgrescrud.user;
+package com.dz.postgrescrud.auth.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

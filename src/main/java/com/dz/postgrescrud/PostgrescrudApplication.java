@@ -7,8 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import static com.dz.postgrescrud.user.Role.ADMIN;
-import static com.dz.postgrescrud.user.Role.MANAGER;
+import static com.dz.postgrescrud.auth.user.Role.ADMIN;
+import static com.dz.postgrescrud.auth.user.Role.MANAGER;
 
 @SpringBootApplication
 public class PostgrescrudApplication {

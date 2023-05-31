@@ -1,4 +1,4 @@
-package com.dz.postgrescrud.user;
+package com.dz.postgrescrud.auth.user;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.dz.postgrescrud.user.Permission.*;
+import static com.dz.postgrescrud.auth.user.Permission.*;
 
 @RequiredArgsConstructor
 public enum Role {

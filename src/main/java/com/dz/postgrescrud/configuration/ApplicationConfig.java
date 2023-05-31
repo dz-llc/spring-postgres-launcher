@@ -1,6 +1,6 @@
 package com.dz.postgrescrud.configuration;
 
-import com.dz.postgrescrud.user.UserRepository;
+import com.dz.postgrescrud.auth.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.dz.postgrescrud.token;
+package com.dz.postgrescrud.auth.token;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

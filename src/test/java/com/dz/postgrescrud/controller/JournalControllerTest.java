@@ -3,7 +3,7 @@ package com.dz.postgrescrud.controller;
 import com.dz.postgrescrud.auth.AuthenticationService;
 import com.dz.postgrescrud.auth.RegisterRequest;
 import com.dz.postgrescrud.configuration.JwtService;
-import com.dz.postgrescrud.user.User;
+import com.dz.postgrescrud.auth.user.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.dz.postgrescrud.user.Role.MANAGER;
+import static com.dz.postgrescrud.auth.user.Role.MANAGER;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -38,6 +38,7 @@ public class JournalControllerTest {
 
     @Test
     public void testCreateJournal() throws Exception {
+        // Register a new test user
         var testManager = RegisterRequest.builder()
                 .firstname("TestFirstname")
                 .lastname("TestLastname")
@@ -45,10 +46,12 @@ public class JournalControllerTest {
                 .password("password")
                 .role(MANAGER)
                 .build();
+        // Obtain the bearer token aka access token (JWT)
         String token = service.register(testManager).getAccessToken();
         mvc.perform(post("/api/v1/journal/create")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("Authorization", "Bearer " + token))
+                        .header("Authorization", "Bearer " + token)
+                        .content("Test Journal Entry"))
                 .andExpect(status().isOk())
                 .andExpect(result -> Assertions.assertTrue(result.getResponse().getContentAsString().contains("Test Journal Entry")));
     }
@@ -68,7 +71,8 @@ public class JournalControllerTest {
 
         mvc.perform(post("/api/v1/journal/create")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("Authorization", "Bearer " + token))
+                        .header("Authorization", "Bearer " + token)
+                        .content("Test Journal Entry"))
                 .andExpect(status().isOk())
                 .andExpect(result -> Assertions.assertTrue(result.getResponse().getContentAsString().contains("Test Journal Entry")));
     }
@@ -76,7 +80,8 @@ public class JournalControllerTest {
     @Test
     public void testCRUDUnauthorized() throws Exception {
         mvc.perform(post("/api/v1/journal/create")
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("Test Journal Entry"))
                 .andExpect(status().is4xxClientError());
     }
 }

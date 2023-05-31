@@ -1,11 +1,11 @@
 package com.dz.postgrescrud.auth;
 
 import com.dz.postgrescrud.configuration.JwtService;
-import com.dz.postgrescrud.token.Token;
-import com.dz.postgrescrud.token.TokenRepository;
-import com.dz.postgrescrud.token.TokenType;
-import com.dz.postgrescrud.user.User;
-import com.dz.postgrescrud.user.UserRepository;
+import com.dz.postgrescrud.auth.token.Token;
+import com.dz.postgrescrud.auth.token.TokenRepository;
+import com.dz.postgrescrud.auth.token.TokenType;
+import com.dz.postgrescrud.auth.user.User;
+import com.dz.postgrescrud.auth.user.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -1,6 +1,6 @@
-package com.dz.postgrescrud.user;
+package com.dz.postgrescrud.auth.user;
 
-import com.dz.postgrescrud.token.Token;
+import com.dz.postgrescrud.auth.token.Token;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
