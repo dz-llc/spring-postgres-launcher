@@ -27,6 +27,9 @@ public class Journal {
     @JsonDeserialize(using = InstantDeserializer.class)
     private Instant date;
 
+    public Journal() {
+    }
+
     public Integer getId() {
         return id;
     }

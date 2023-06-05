@@ -1,6 +1,8 @@
 package com.dz.postgrescrud.controller;
 
+import co.elastic.clients.elasticsearch.core.MsearchResponse;
 import com.dz.postgrescrud.domain.Journal;
+import com.dz.postgrescrud.elastic.ElasticsearchService;
 import com.dz.postgrescrud.repository.JournalRepository;
 import com.dz.postgrescrud.service.JournalService;
 import org.slf4j.Logger;
@@ -8,10 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -23,6 +22,9 @@ public class JournalController {
 
     @Autowired
     JournalService journalService;
+
+    @Autowired
+    ElasticsearchService elasticsearchService;
 
     @PostMapping("/create")
     public ResponseEntity<String> create(
@@ -41,6 +43,20 @@ public class JournalController {
         } catch (Exception e) {
             logger.error(e.getMessage());
             return ResponseEntity.badRequest().body("Error creating journal entry");
+        }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<String> search(
+            @RequestBody String searchText
+    ) throws Exception {
+        try {
+            // Create a Journal Entry
+            var res = elasticsearchService.journalEntryLookup(searchText);
+            return ResponseEntity.ok(res.toString());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseEntity.badRequest().body("Error searching for journal entry");
         }
     }
 }
