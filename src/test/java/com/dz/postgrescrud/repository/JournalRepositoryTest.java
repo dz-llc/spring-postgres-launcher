@@ -12,12 +12,8 @@ import java.util.Date;
 @SpringBootTest(classes = {RepositoryConfiguration.class})
 public class JournalRepositoryTest {
 
-    private JournalRepository journalRepository;
-
     @Autowired
-    public void setProductRepository(JournalRepository journalRepository) {
-        this.journalRepository = journalRepository;
-    }
+    private JournalRepository journalRepository;
 
     @Test
     public void testSaveJournal() {

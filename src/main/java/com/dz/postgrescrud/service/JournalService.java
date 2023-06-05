@@ -17,6 +17,7 @@ public class JournalService {
     @Autowired
     ElasticsearchService elasticsearchService;
 
+    // TODO: create DTO for journal entry
     public Journal createJournal(String journalEntry) throws Exception {
         // Create a Journal Entry
         Journal journal = new Journal();
@@ -24,11 +25,11 @@ public class JournalService {
         journal.setImageUrl("Test Image URL");
         journal.setDate(new Date().toInstant());
 
-        // Save to db
-        journalRepository.save(journal);
-
         // Save to elasticsearch
-         elasticsearchService.indexJournalEntry(journal);
-         return journal;
+        elasticsearchService.indexJournalEntry(journal);
+
+        // Save to db
+        Journal res = journalRepository.save(journal);
+        return res;
     }
 }
