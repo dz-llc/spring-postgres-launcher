@@ -1,5 +1,9 @@
 package com.dz.postgrescrud.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -16,7 +20,11 @@ public class Journal {
     private Integer version;
 
     private String journalEntry;
+    // We'll likely want to store the image in S3 and store the URL here
     private String imageUrl;
+
+    @JsonSerialize(using = InstantSerializer.class)
+    @JsonDeserialize(using = InstantDeserializer.class)
     private Instant date;
 
     public Integer getId() {
@@ -57,5 +65,16 @@ public class Journal {
 
     public void setDate(Instant date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Journal{" +
+                "id=" + id +
+                ", version=" + version +
+                ", journalEntry='" + journalEntry + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", date=" + date +
+                '}';
     }
 }
