@@ -31,12 +31,6 @@ public class JournalController {
             @RequestBody String journalEntry
     ) throws Exception {
         try {
-            logger.trace("A TRACE Message");
-            logger.debug("A DEBUG Message");
-            logger.info("An INFO Message");
-            logger.warn("A WARN Message");
-            logger.error("An ERROR Message");
-
             // Create a Journal Entry
             journalService.createJournal(journalEntry);
             return ResponseEntity.ok(journalEntry);
@@ -46,14 +40,18 @@ public class JournalController {
         }
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<String> search(
-            @RequestBody String searchText
+    @GetMapping("/searchJournalEntries")
+    public ResponseEntity<String> searchJournalEntries(
+            @RequestBody String searchEntryText
     ) throws Exception {
         try {
             // Create a Journal Entry
-            var res = elasticsearchService.journalEntryLookup(searchText);
-            return ResponseEntity.ok(res.toString());
+            var res = elasticsearchService.journalEntryLookup(searchEntryText);
+            if (res == null) {
+                return ResponseEntity.ok("No Journal Entries found for text: " + searchEntryText);
+            } else {
+                return ResponseEntity.ok(res.toString());
+            }
         } catch (Exception e) {
             logger.error(e.getMessage());
             return ResponseEntity.badRequest().body("Error searching for journal entry");
