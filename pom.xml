@@ -49,6 +49,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!--User H2 db for tests-->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!--Custom spring security-->
         <!--		<dependency>-->
         <!--			<groupId>org.springframework.security</groupId>-->
