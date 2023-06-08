@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Service
@@ -27,7 +28,7 @@ public class JournalService {
         Journal journal = new Journal();
         journal.setJournalEntry(journalEntry);
         journal.setImageUrl("Test Image URL");
-        journal.setDate(new Date().toInstant());
+        journal.setDate(LocalDateTime.now());
 
         logger.info("Creating Journal: " + journal);
 

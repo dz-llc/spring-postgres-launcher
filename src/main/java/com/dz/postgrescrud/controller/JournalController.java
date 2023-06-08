@@ -1,9 +1,6 @@
 package com.dz.postgrescrud.controller;
 
-import co.elastic.clients.elasticsearch.core.MsearchResponse;
-import com.dz.postgrescrud.domain.Journal;
 import com.dz.postgrescrud.elastic.ElasticsearchService;
-import com.dz.postgrescrud.repository.JournalRepository;
 import com.dz.postgrescrud.service.JournalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 
 @Controller
 @RequestMapping(value = "/api/v1/journal", method = {RequestMethod.POST})

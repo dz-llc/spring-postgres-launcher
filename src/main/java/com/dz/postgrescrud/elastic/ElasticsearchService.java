@@ -6,7 +6,6 @@ import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch.core.IndexResponse;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import com.dz.postgrescrud.domain.Journal;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -19,8 +18,6 @@ import java.util.List;
 public class ElasticsearchService {
 
     Logger logger = LoggerFactory.getLogger(ElasticsearchService.class);
-
-    ObjectMapper objectMapper = new ObjectMapper();
 
     ElasticsearchClient esClient = ElasticsearchClientFactory.createClient("localhost", 9200);
 
@@ -35,8 +32,8 @@ public class ElasticsearchService {
         return journal;
     }
 
-    public SearchResponse<Object> journalEntryLookup(String text) throws Exception {
-        //Terms query
+    public SearchResponse<Journal> journalEntryLookup(String text) throws Exception {
+        // Terms query
         List<FieldValue> list = Arrays.asList(FieldValue.of(text), FieldValue.of("ALL"));
         Query query = new Query.Builder().terms(termsQueryBuilder -> termsQueryBuilder
                 .field("journalEntry")
@@ -45,15 +42,15 @@ public class ElasticsearchService {
         List<Query> shouldQueryList = new ArrayList<>();
         shouldQueryList.add(query);
 
-
-        SearchResponse<Object> response = esClient.search(searchRequest -> searchRequest
+        SearchResponse<Journal> response = esClient.search(searchRequest -> searchRequest
+                        .index("idx_journal")
                         .query(qBuilder -> qBuilder
                                 .bool(boolQueryBuilder -> boolQueryBuilder
-                                        //using should query list here
+                                        // using should query list here
                                         .should(shouldQueryList)))
-                , Object.class);
-
+                , Journal.class);
         response.hits().hits().forEach(h -> logger.info("Search results for text '" + text + "': " + h.toString()));
+
         return response;
     }
 }

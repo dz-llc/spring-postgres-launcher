@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @SpringBootTest(classes = {RepositoryConfiguration.class})
 public class JournalRepositoryTest {
@@ -21,7 +21,7 @@ public class JournalRepositoryTest {
         Journal journal = new Journal();
         journal.setJournalEntry("Test Journal Entry");
         journal.setImageUrl("Test Image URL");
-        journal.setDate(new Date().toInstant());
+        journal.setDate(LocalDateTime.now());
 
         //save product, verify has ID value after save
         Assertions.assertNull(journal.getId()); //null before save

@@ -1,13 +1,14 @@
 package com.dz.postgrescrud.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import jakarta.persistence.*;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -22,12 +23,13 @@ public class Journal {
     private Integer version;
 
     private String journalEntry;
+
     // We'll likely want to store the image in S3 and store the URL here
     private String imageUrl;
 
-    @JsonSerialize(using = InstantSerializer.class)
-    @JsonDeserialize(using = InstantDeserializer.class)
-    private Instant date;
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    private LocalDateTime date;
 
     public Journal() {
     }
@@ -64,11 +66,11 @@ public class Journal {
         this.imageUrl = imageUrl;
     }
 
-    public Instant getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Instant date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
